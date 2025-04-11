@@ -8,7 +8,7 @@ cd SolBench
 pip install -r requirements.txt
 ```
 ### Installation of Diffusc and Echidna
-TODO:
+Coming soon...
 <!-- 采样文件必须在diffusc文件夹下 -->
 ## Usage
 ### Code Completion
@@ -92,7 +92,7 @@ python src/retrieval_augmented_code_repair/self_debug_1.py
 python src/utils/openai_retrieval.py --save_dirname ra_self_debug_1
 
 python src/code_repair/self_debug_2.py
-****
+
 python src/utils/openai_retrieval.py --save_dirname self_debug_2
 ```
 Finally, using the following to get the pass rate:
@@ -102,4 +102,13 @@ python src/utils/post_process.py --base_save_dir diffusc/sample_results/ra_code_
 python src/executor/echidna_deploy_mp.py --base_path diffusc/sample_results/ra_code_repair/context_length_256
 
 python src/executor/PassRateStat_echidna.py --base_path diffusc/sample_results/ra_code_repair/context_length_256
+```
+## Citation
+```
+@article{chen2025solbench,
+  title={SolBench: A Dataset and Benchmark for Evaluating Functional Correctness in Solidity Code Completion and Repair},
+  author={Chen, Zaoyu and Qin, Haoran and Chen, Nuo and Zhao, Xiangyu and Xue, Lei and Luo, Xiapu and Wu, Xiao-Ming},
+  journal={arXiv preprint arXiv:2503.01098},
+  year={2025}
+}
 ```
