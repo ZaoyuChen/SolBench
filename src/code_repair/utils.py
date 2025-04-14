@@ -495,7 +495,7 @@ def model_call(messages):
     """
     model=["gpt-4o-mini","gpt-3.5-turbo",'gpt-4o'][0]
     client = OpenAI(
-        api_key='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'
+        api_key='your api key'
     )
     
     completions = client.chat.completions.create(
