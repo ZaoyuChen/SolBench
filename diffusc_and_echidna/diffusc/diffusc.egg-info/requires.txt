@@ -1,0 +1,23 @@
+colorama==0.4.4
+packaging
+eth_typing>=3.0.0
+eth_utils>=2.1.0
+slither-analyzer@ git+https://github.com/webthethird/slither.git@dev-diffusc-testing
+crytic-compile<0.4.0,>=0.3.1
+web3>=6.0.0
+
+[dev]
+diffusc[lint,test]
+
+[lint]
+black==22.3.0
+pylint==2.13.4
+mypy==1.2.0
+
+[test]
+pytest
+pytest-cov
+pytest-xdist
+deepdiff
+numpy
+coverage[toml]

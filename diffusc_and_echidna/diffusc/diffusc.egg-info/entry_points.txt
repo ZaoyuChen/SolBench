@@ -1,0 +1,2 @@
+[console_scripts]
+diffusc = diffusc.diffusc:main
