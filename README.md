@@ -1,35 +1,48 @@
 # SolBench: A Dataset and Benchmark for Evaluating Functional Correctness in Solidity Code Completion and Repair    
 
+SolBench is a benchmark for evaluating the functional correctness of Solidity smart contracts. SolBench includes 4178 functions from 1155 Ethereum-deployed contracts.
 
 ## Installation
+### Basic
+
 ```
+python -m venv solbench
+source solbench/bin/activate
 git clone git@github.com:ZaoyuChen/SolBench.git
 cd SolBench
 pip install -r requirements.txt
 ```
 ### Installation of Diffusc and Echidna
-Coming soon...
+We modified the source code of the diffusc and echidna tools to enable concurrent function correctness evaluation in a multi-process manner.
+```
+cd diffusc_and_echidna/diffusc
+pip install .
+cd diffusc_and_echidna
+python install_solc_artifacts.py
+export PATH=/full/path/to/SolBench/diffusc_and_echidna/docker_compile_echidna:$PATH
+```
 <!-- 采样文件必须在diffusc文件夹下 -->
 ## Usage
 ### Code Completion
 Using the following command to run code completion task on SolBench with different models and context lengths:
 ```
+cd SolBench
 python src/code_completion/run.py --model_path your_model_path --context_length 256 --completions_save_path sample_results/code_completion/context_length_256.jsonl
 ```
 `context_length` could be `0,256,512,1k,2k,4k`.
 
 Then post process the model sampling results for executor evaluation:
 ```
-python src/utils/post_process.py --base_save_dir diffusc/sample_results/code_completion/context_length_256 --sol_prompt_sc_fname data/SolBench_ds.parquet --openai_outputfile sample_results/code_completion/context_length_256.jsonl --model_type qwen
+python src/utils/post_process.py --base_save_dir diffusc_and_echidna/diffusc/sample_results/code_completion/context_length_256 --sol_prompt_sc_fname data/SolBench_ds.parquet --openai_outputfile sample_results/code_completion/context_length_256.jsonl --model_type qwen
 ```
 ### Executor for Functional Correctness
 Run the multi-process version of Diffusc and Echidna to evaluate the functional correctness of completed functions:
 ```
-python src/executor/echidna_deploy_mp.py --base_path diffusc/sample_results/code_completion/context_length_256
+python src/executor/echidna_deploy_mp.py --base_path diffusc_and_echidna/diffusc/sample_results/code_completion/context_length_256
 ```
 Using the following to compute the pass rate:
 ```
-python src/executor/PassRateStat_echidna.py --base_path diffusc/sample_results/code_completion/context_length_256
+python src/executor/PassRateStat_echidna.py --base_path diffusc_and_echidna/diffusc/sample_results/code_completion/context_length_256
 ```
 ### Code Repair
 First, extract the problems identified as functionally incorrect in the initial code completion and the feedback for the error:
@@ -58,11 +71,11 @@ python src/utils/openai_retrieval.py --save_dirname self_debug_2
 ```
 Finally, using the following to get the pass rate:
 ```
-python src/utils/post_process.py --base_save_dir diffusc/sample_results/code_repair/context_length_256 --sol_prompt_sc_fname data/SolBench_ds.parquet --openai_outputfile sample_results/code_repair/context_length_256.jsonl --model_type openai
+python src/utils/post_process.py --base_save_dir diffusc_and_echidna/diffusc/sample_results/code_repair/context_length_256 --sol_prompt_sc_fname data/SolBench_ds.parquet --openai_outputfile sample_results/code_repair/context_length_256.jsonl --model_type openai
 
-python src/executor/echidna_deploy_mp.py --base_path diffusc/sample_results/code_repair/context_length_256
+python src/executor/echidna_deploy_mp.py --base_path diffusc_and_echidna/diffusc/sample_results/code_repair/context_length_256
 
-python src/executor/PassRateStat_echidna.py --base_path diffusc/sample_results/code_repair/context_length_256
+python src/executor/PassRateStat_echidna.py --base_path diffusc_and_echidna/diffusc/sample_results/code_repair/context_length_256
 ```
 ### Retrieval-Augmented Code Repair
 First, extract the problems identified as functionally incorrect in the initial code completion and the feedback for the error, and also retrieve the relevant code snippets:
@@ -97,11 +110,11 @@ python src/utils/openai_retrieval.py --save_dirname self_debug_2
 ```
 Finally, using the following to get the pass rate:
 ```
-python src/utils/post_process.py --base_save_dir diffusc/sample_results/ra_code_repair/context_length_256 --sol_prompt_sc_fname data/SolBench_ds.parquet --openai_outputfile sample_results/ra_code_repair/context_length_256.jsonl --model_type openai
+python src/utils/post_process.py --base_save_dir diffusc_and_echidna/diffusc/sample_results/ra_code_repair/context_length_256 --sol_prompt_sc_fname data/SolBench_ds.parquet --openai_outputfile sample_results/ra_code_repair/context_length_256.jsonl --model_type openai
 
-python src/executor/echidna_deploy_mp.py --base_path diffusc/sample_results/ra_code_repair/context_length_256
+python src/executor/echidna_deploy_mp.py --base_path diffusc_and_echidna/diffusc/sample_results/ra_code_repair/context_length_256
 
-python src/executor/PassRateStat_echidna.py --base_path diffusc/sample_results/ra_code_repair/context_length_256
+python src/executor/PassRateStat_echidna.py --base_path diffusc_and_echidna/diffusc/sample_results/ra_code_repair/context_length_256
 ```
 ## Citation
 ```
@@ -112,3 +125,7 @@ python src/executor/PassRateStat_echidna.py --base_path diffusc/sample_results/r
   year={2025}
 }
 ```
+## Acknowledgment
+- [Diffusc](https://github.com/crytic/diffusc)
+- [Echidna](https://github.com/crytic/echidna)
+- [CrossCodeEval](https://github.com/amazon-science/cceval)
