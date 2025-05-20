@@ -4,7 +4,7 @@
 if __name__ == '__main__':
     length='256'
     # clean数据集
-    file_folder_path='data/SolBench_ds.parquet'
+    file_folder_path='data/SolBench.parquet'
     # fail采样dir
     base_path='diffusc/sample_results/context_length_256'
     # fail数据集save path

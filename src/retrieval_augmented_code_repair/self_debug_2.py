@@ -69,7 +69,7 @@ if __name__ == '__main__':
     for length in ['256']:
 
         # 第一次sample文件
-        jsonl_path='sample_results/ra_self_debug_1/256.jsonl'
+        jsonl_path=f'sample_results/ra_self_debug_1/{length}.jsonl'
 
         ds1=read_jsonl(jsonl_path)
 

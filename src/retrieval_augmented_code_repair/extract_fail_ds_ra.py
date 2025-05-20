@@ -4,7 +4,7 @@
 if __name__ == '__main__':
     length='256'
     # clean数据集
-    file_folder_path='data/SolBench_ds.parquet'
+    file_folder_path='data/SolBench.parquet'
     # fail采样dir
     base_path='diffusc/sample_results/context_length_256'
     # fail数据集save path
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     from utils import extract_prompt_i_from_error_infos_in_sample_dir
     # 根据错误信息原因提取prompt_i
-    extract_idxs=extract_prompt_i_from_error_infos_in_sample_dir(base_path,r'gpt-4o-mini-2024-07-18_epoch0_prompt(\d+)_sample0')
+    extract_idxs=extract_prompt_i_from_error_infos_in_sample_dir(base_path,r'my_model_epoch0_prompt(\d+)_sample0')
 
     # 读取ds数据集
     from utils import return_prompt_i_from_error_info,load_dataset_from_file_or_folder,save_list_of_dir_as_parquet
@@ -35,13 +35,13 @@ if __name__ == '__main__':
     # 将错误原因append到数据集里
     from utils import return_prompt_i_from_error_info,load_dataset_from_file_or_folder,save_list_of_dir_as_parquet,read_error_infos_from_sample_dir
 
-    prompt_i_error_infos=read_error_infos_from_sample_dir(base_path,r'gpt-4o-mini-2024-07-18_epoch0_prompt(\d+)_sample0')
+    prompt_i_error_infos=read_error_infos_from_sample_dir(base_path,r'my_model_epoch0_prompt(\d+)_sample0')
 
     # 将第一次生成的funit提取出来并入文件
     from utils import read_funit_gen_from_sample_dir
 
     # 调用函数处理文件
-    prompt_i_funitgen = read_funit_gen_from_sample_dir(base_path,r'gpt-4o-mini-2024-07-18_epoch0_prompt(\d+).txt')
+    prompt_i_funitgen = read_funit_gen_from_sample_dir(base_path,r'my_model_epoch0_prompt(\d+).txt')
 
     import json
     ds_fail_append_fe=[]
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     ds_fail_append_fer=[] 
     for d in tqdm(ds_fail_append_fe):
         error_infos=json.loads(d['error_infos'])
-        sc='\r\n\r\n'.join(json.loads(d['sc']))
+        sc='\r\n\r\n'.join(json.loads(d['sc_ba']))
 
         retrieve_sc=main(d['funitgen'],sc,error_infos,retrieve_num,retrieve_len,crosscodeeval_method_name)
         d['retrieve_sc']=json.dumps(retrieve_sc)

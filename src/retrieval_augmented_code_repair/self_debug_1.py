@@ -76,7 +76,7 @@ if __name__ == '__main__':
     batch_id_dicts=[]
     for length in ['256']:
         # 参数区
-        clean_fail_ds_path=rf"data/fail_ds/context_length_{length}_fail_ra.parquet"
+        clean_fail_ds_path=f"data/fail_ds/context_length_{length}_fail_ra.parquet"
         ds=load_dataset_from_file_or_folder(clean_fail_ds_path)
 
         batch_id=single_mode_sample(ds)

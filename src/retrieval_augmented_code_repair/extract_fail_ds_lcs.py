@@ -4,7 +4,7 @@
 if __name__ == '__main__':
     length='256'
     # clean数据集
-    file_folder_path='data/SolBench_ds.parquet'
+    file_folder_path='data/SolBench.parquet'
     # fail采样dir
     base_path='diffusc/sample_results/context_length_256'
     # fail数据集save path
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     ds_fail_append_fer=[]
     for d in tqdm(ds_fail_append_fe):
         error_infos=json.loads(d['error_infos'])
-        sc='\r\n\r\n'.join(json.loads(d['sc']))
+        sc='\r\n\r\n'.join(json.loads(d['sc_ba']))
         retrieve_sc=main(d['funit'],d['funitgen'],sc,error_infos,retrieve_num,retrieve_len)
         d['retrieve_sc']=json.dumps(retrieve_sc)
         ds_fail_append_fer.append(d)
