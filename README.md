@@ -24,7 +24,7 @@ export PATH=/full/path/to/SolBench/diffusc_and_echidna/docker_compile_echidna:$P
 
 <!-- 采样文件必须在diffusc文件夹下 -->
 ## Usage
-
+Please first download the SolBench dataset from [Zenodo](10.5281/zenodo.15555541), and then place the downloaded files in the `data` directory.
 ### Code Completion
 Using the following command to run code completion task on SolBench with different models and context lengths:
 
