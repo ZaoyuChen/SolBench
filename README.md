@@ -1,5 +1,3 @@
-# SolBench: A Dataset and Benchmark for Evaluating Functional Correctness in Solidity Code Completion and Repair    
-
 SolBench is a benchmark for evaluating the functional correctness of Solidity smart contracts. SolBench includes 28825 functions from 7604 Ethereum-deployed contracts.
 
 ## Installation
@@ -26,7 +24,6 @@ export PATH=/full/path/to/SolBench/diffusc_and_echidna/docker_compile_echidna:$P
 
 <!-- 采样文件必须在diffusc文件夹下 -->
 ## Usage
-Please first download the SolBench dataset from [Hugging Face](https://huggingface.co/datasets/zychen22/SolBench), and then place the downloaded files in the `data` directory.
 
 ### Code Completion
 Using the following command to run code completion task on SolBench with different models and context lengths:
@@ -180,17 +177,6 @@ python src/executor/echidna_deploy_mp.py \
 
 python src/executor/PassRateStat_echidna.py \
   --base_path diffusc_and_echidna/diffusc/sample_results/ra_code_repair/context_length_256
-```
-
-## Citation
-
-```
-@article{chen2025solbench,
-  title={SolBench: A Dataset and Benchmark for Evaluating Functional Correctness in Solidity Code Completion and Repair},
-  author={Chen, Zaoyu and Qin, Haoran and Chen, Nuo and Zhao, Xiangyu and Xue, Lei and Luo, Xiapu and Wu, Xiao-Ming},
-  journal={arXiv preprint arXiv:2503.01098},
-  year={2025}
-}
 ```
 
 ## Acknowledgment
