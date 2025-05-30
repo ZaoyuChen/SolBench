@@ -70,7 +70,7 @@ First, extract the problems identified as functionally incorrect in the initial 
 python src/code_repair/extract_fail_ds.py
 ```
 
-If you don't perform the initial code completion step, we provide functionally incorrect examples in the `data/SolBench_racr` directory.
+If you don't perform the initial code completion step, we provide functionally incorrect examples in the `data/SolBench_racr_4k_lcs.parquet`.
 
 Then, perform code repair methods using:
 
@@ -124,7 +124,7 @@ First, extract the problems identified as functionally incorrect in the initial 
 python src/retrieval_augmented_code_repair/extract_fail_ds_ra.py
 ```
 
-If you don't perform the initial code completion step, we provide functionally incorrect examples in the `data/SolBench_racr` directory.
+If you don't perform the initial code completion step, we provide functionally incorrect examples in the `data/SolBench_racr_4k_lcs.parquet`.
 
 You can specify retrieval methods (`bm25 tfidf jaccard_sim unixcoder codebert`) and context length in the parameter region. Here, we implement these retrieval methods from [CrossCodeEval](https://github.com/amazon-science/cceval).
 

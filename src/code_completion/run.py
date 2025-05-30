@@ -98,7 +98,7 @@ if  __name__ == "__main__":
     pipe = pipeline("text-generation", model=args.model_path)
     mode=args.context_length
     
-    ds=load_dataset_from_file_or_folder(f'data/SolBench_length/SolBench_length_{mode}.parquet')
+    ds=load_dataset_from_file_or_folder(f'data/SolBench_length_{mode}.parquet')
     
     single_mode_completion(pipe,ds,mode)
         
