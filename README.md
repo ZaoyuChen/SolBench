@@ -1,3 +1,13 @@
+## 📄 Paper
+
+This benchmark accompanies our paper accepted at **FSE 2026**:
+
+**Towards Automated Smart Contract Generation: Evaluation, Benchmarking, and Retrieval-Augmented Repair**
+*Zaoyu Chen, Haoran Qin, Nuo Chen, Xiangyu Zhao, Lei Xue, Xiapu Luo, Xiao-Ming Wu*
+**The ACM International Conference on the Foundations of Software Engineering (FSE), 2026**
+
+📌 arXiv: [https://arxiv.org/abs/2503.01098](https://arxiv.org/abs/2503.01098)
+
 SolBench is a benchmark for evaluating the functional correctness of Solidity smart contracts. SolBench includes 28825 functions from 7604 Ethereum-deployed contracts.
 
 ## Installation
@@ -22,7 +32,6 @@ python install_solc_artifacts.py
 export PATH=/full/path/to/SolBench/diffusc_and_echidna/docker_compile_echidna:$PATH
 ```
 
-<!-- 采样文件必须在diffusc文件夹下 -->
 ## Usage
 Please first download the SolBench dataset from [Zenodo](https://doi.org/10.5281/zenodo.15555541), and then place the downloaded files in the `data` directory.
 ### Code Completion
@@ -183,3 +192,18 @@ python src/executor/PassRateStat_echidna.py \
 - [Diffusc](https://github.com/crytic/diffusc)
 - [Echidna](https://github.com/crytic/echidna)
 - [CrossCodeEval](https://github.com/amazon-science/cceval)
+
+
+## 📚 Citation
+
+```bibtex
+@misc{chen2026automatedsmartcontractgeneration,
+  title        = {Towards Automated Smart Contract Generation: Evaluation, Benchmarking, and Retrieval-Augmented Repair},
+  author       = {Zaoyu Chen and Haoran Qin and Nuo Chen and Xiangyu Zhao and Lei Xue and Xiapu Luo and Xiao-Ming Wu},
+  year         = {2026},
+  eprint       = {2503.01098},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.SE},
+  url          = {https://arxiv.org/abs/2503.01098}
+}
+```
